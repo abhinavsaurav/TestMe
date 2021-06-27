@@ -1,0 +1,11 @@
+.MyHeader{
+    height:5vh;
+    width: 100vw;
+    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    
+    /* justify-content: center; */
+    background-color: #353535;
+    color:aliceblue
+}
