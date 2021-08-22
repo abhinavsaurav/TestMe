@@ -11,9 +11,13 @@ const Cart = (props) => {
 	const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
 	const hasItems = cartCtx.items.length > 0;
 
-	const cartItemRemoveHandler = (id) => {};
+	const cartItemRemoveHandler = (id) => {
+		cartCtx.removeItem(id);
+	};
 
-	const cartItemAddHandler = (item) => {};
+	const cartItemAddHandler = (item) => {
+		cartCtx.addItem({ ...item, amount: 1 });
+	};
 
 	const cartItems = (
 		<ul className={classes["cart-items"]}>
@@ -21,7 +25,7 @@ const Cart = (props) => {
 				<CartItem
 					key={item.id}
 					name={item.name}
-					amount={item.price}
+					amount={item.amount}
 					price={item.price}
 					onRemove={cartItemRemoveHandler.bind(null, item.id)}
 					onAdd={cartItemAddHandler.bind(null, item)} // bind makes sure that the handler do receive the item . Read more in detail below
