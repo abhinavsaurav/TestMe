@@ -15,6 +15,18 @@ const defaultCartState = {
 // state is the last state snapshot given by react
 // action should be dispatched by us
 const cartReducer = (state, action) => {
+	if (action.type === "ADD") {
+		// concat returns a new array
+		const updatedItems = state.items.concat(action.item);
+		const updatedTotalAmount =
+			state.totalAmount + action.item.price * action.item.amount;
+
+		return {
+			items: updatedItems,
+			totalAmount: updatedTotalAmount,
+		};
+	}
+
 	return defaultCartState;
 };
 
@@ -25,14 +37,18 @@ const CartProvider = (props) => {
 		defaultCartState
 	);
 
-	const addItemToCartHandler = (item) => {};
+	const addItemToCartHandler = (item) => {
+		dispatchCartAction({ type: "ADD", item: item });
+	};
 
-	const removeItemFromCartHandler = (id) => {};
+	const removeItemFromCartHandler = (id) => {
+		dispatchCartAction({ type: "REMOVE", id: id });
+	};
 
 	// this is the value that will be updated overtime
 	const cartContext = {
-		items: [],
-		totalAmount: 0,
+		items: cartState.items,
+		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemFromCartHandler,
 	};
