@@ -17,20 +17,25 @@ import {
    useDispatch,
   //  connect 
   } from 'react-redux';
-import { counterActions  } from '../store/index';
+import { counterActions  } from '../store/counter';
 
   import classes from './Counter.module.css';
 
 const Counter = () => {
+
   // it takes a function which will then be executed by react-redux a function which will determine which piece of data
   // we want to extract from our store
   // we will receive the state managed by redux and then we will basically ask what we want which then gets returned 
   // Also using this react-redux will auto enable the subscription for it . Also on unmounting react-redux will automatically remove the subsription for us
-  const counter = useSelector(state => state.counter);
+  
+  const counter = useSelector(state => state.counter.counter);
   const dispatch = useDispatch(); // don't need to pass a arg but we can now make use of the intialization to dispatch our actions
 
-  const show = useSelector(state => state.showCounter);
 
+  // showCounter is in our redux state and we are accessing the counter slice and accessing it
+  const show = useSelector(state => state.counter.showCounter);
+
+  // no changes made to counterActions as it contains the same method
   const incrementHandler = () => {
     
     dispatch(counterActions.increment()); 
